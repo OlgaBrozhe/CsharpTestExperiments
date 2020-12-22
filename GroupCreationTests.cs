@@ -8,10 +8,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace CsharpTestExperiments
+namespace WebAddressbookTests
 {
     [TestClass]
-    public class CreateNewGroup
+    public class GroupCreationTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -19,10 +19,10 @@ namespace CsharpTestExperiments
         private bool acceptNextAlert = true;
 
         [SetUp]
-        public void SetupTest()
+        public void CreateGroup()
         {
             driver = new FirefoxDriver();
-            baseURL = "https://www.google.com/";
+            baseURL = "http://127.0.0.1/addressbook/";
             verificationErrors = new StringBuilder();
         }
 
@@ -41,30 +41,67 @@ namespace CsharpTestExperiments
         }
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void TestCreateNewGroup()
         {
-            driver.Navigate().GoToUrl("http://127.0.0.1/addressbook/");
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys("admin");
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys("secret");
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("1");
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys("1");
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys("1");
-            driver.FindElement(By.Name("submit")).Click();
+            OpenPage(baseURL);
+            Login(new AccountData("admin","secret"));
+            GoToGroupsPage();
+            SelectNewGroup();
+            GroupData group = new GroupData("1");
+            FillInGroupInfo(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+        }
+
+        private void ReturnToGroupsPage()
+        {
             driver.FindElement(By.LinkText("group page")).Click();
         }
+
+        private void SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void FillInGroupInfo(GroupData group)
+        {
+            driver.FindElement(By.Name("group_name")).Click();
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(group.GroupName);
+            driver.FindElement(By.Name("group_header")).Click();
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(group.GroupHeader);
+            driver.FindElement(By.Name("group_footer")).Click();
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.GroupFooter);
+        }
+
+        private void SelectNewGroup()
+        {
+            driver.FindElement(By.Name("new")).Click();
+        }
+
+        private void GoToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+
+        private void Login(AccountData account)
+        {
+            driver.FindElement(By.Name("user")).Click();
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
+            driver.FindElement(By.Name("pass")).Click();
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
+
+        private void OpenPage(string page)
+        {
+            driver.Navigate().GoToUrl(page);
+        }
+
         private bool IsElementPresent(By by)
         {
             try
