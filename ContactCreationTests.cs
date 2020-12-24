@@ -4,16 +4,17 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestClass]
-    public class GroupDelTests : TestBase
+    public class ContactCreationTests : TestBase
     {
         [Test]
-        public void TestDelGroup()
+        public void TestCreateNewContact()
         {
             OpenPage(baseURL);
             Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            SelectGroup(1);
-            SubmitGroupDel();
+            GoToAddNewContactPage();
+            ContactData contact = new ContactData("1","1");
+            FillInContactInfo(contact);
+            SubmitAction();
             ReturnToHomePage();
         }
     }

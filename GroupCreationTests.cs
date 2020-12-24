@@ -15,8 +15,8 @@ namespace WebAddressbookTests
             SelectNewGroup();
             GroupData group = new GroupData("1");
             FillInGroupInfo(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
+            SubmitAction();
+            ReturnToHomePage();
         }
     }
 }

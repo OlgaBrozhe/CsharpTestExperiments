@@ -3,15 +3,16 @@
   <Class Name="WebAddressbookTests.TestBase" Collapsed="true">
     <Position X="1.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgIAAAQBAABAgABAAAAAAADAAAAIMAAACAAQAAAAACA=</HashCode>
+      <HashCode>AgIAAAQBAABAgAAAAAAAAADAAAAIMAAACACQAAAAACA=</HashCode>
       <FileName>TestBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WebAddressbookTests.GroupCreationTests" Collapsed="true">
+  <Class Name="WebAddressbookTests.ContactCreationTests" Collapsed="true">
     <Position X="0.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>GroupCreationTests.cs</FileName>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ContactCreationTests.cs</FileName>
+      <NewMemberFileName>GroupCreationTests.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.GroupDelTests" Collapsed="true">
